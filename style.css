@@ -1,0 +1,45 @@
+/* Estilos principales y temas: light (predeterminado), dark, blue */
+:root{
+  --bg:#ffffff; --card:#f7f7f9; --text:#0b1220; --muted:#555; --accent:#0b63d6; --accent-2:#2dd4bf;
+  --glass:rgba(11,18,32,0.04);
+}
+*{box-sizing:border-box;font-family:Inter, 'Segoe UI', Arial, sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.5}
+.container{max-width:1100px;margin:24px auto;padding:18px}
+.site-header{display:flex;justify-content:space-between;align-items:center;background:var(--card);padding:12px 18px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.header-left{display:flex;align-items:center;gap:12px}
+.logo{width:88px;height:auto;border-radius:6px}
+.site-title h1{margin:0;font-size:20px}
+.site-title p{margin:0;color:var(--muted);font-size:13px}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.author{font-size:13px;text-align:right}
+.author .muted{color:var(--muted);font-size:12px}
+.controls{display:flex;gap:8px;align-items:center}
+.controls button, .controls select{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer}
+
+.card{background:var(--card);padding:14px;border-radius:10px;margin-bottom:14px;border:1px solid rgba(0,0,0,0.04)}
+.concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.calc input{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);margin-bottom:8px}
+.row{display:flex;gap:8px}
+.row button{padding:8px 10px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-weight:600}
+.row button.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text)}
+.result{background:var(--glass);padding:8px;border-radius:6px;margin-top:6px;color:var(--text)}
+
+.site-footer{background:transparent;text-align:center;padding:12px;color:var(--muted);font-size:13px}
+
+/* Tema oscuro (neón) */
+body.theme-dark{
+  --bg:#071827; --card:#08121a; --text:#e6eef6; --muted:#94a3b8; --accent:#2dd4bf; --accent-2:#8b5cf6; --glass:rgba(255,255,255,0.03);
+}
+/* Tema azul (científico) */
+body.theme-blue{
+  --bg:#e9f2ff; --card:#ffffff; --text:#042a4a; --muted:#3b6b92; --accent:#0b63d6; --accent-2:#0b9bd6; --glass:rgba(11,99,214,0.04);
+}
+
+/* Responsive */
+@media(max-width:980px){
+  .concepts{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .header-right{align-items:flex-start}
+}

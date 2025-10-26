@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Física II — Potencial · Corriente · Resistencia | Norberto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<img src="img/logo_umg.png" alt="Universidad Mariano Gálvez" class="logo-umg">
+<body class="theme-light">
+  <header class="site-header">
+    <div class="header-left">
+      <div class="site-title">
+        <h1>Física II</h1>
+        <p>Potencial eléctrico · Corriente · Resistencia</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="author">
+        <div class="muted">Estudiante</div>
+        <strong>Norberto Pedro Chún González</strong>
+        
+        <div class="muted">Carné</div>
+        <strong>0903-24-5288</strong>
+
+        <div class="muted">Estudiante</div> 
+        <strong>Oscar Danilo de léon escobar</strong>
+        
+        <div class="muted">Carné</div>
+        <strong>0903-21-17490</strong>
+
+        <div class="universidad">
+          <div>Universidad Mariano Gálvez</div>
+        </div>
+
+        <div class="controls">
+          <button id="themeBtn">Cambiar tema</button>
+          <select id="themeSelect" aria-label="Seleccionar tema">
+            <option value="light">Claro profesional (predeterminado)</option>
+            <option value="dark">Oscuro moderno (neón)</option>
+            <option value="blue">Azul científico</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Conceptos clave</h2>
+      <div class="concepts">
+        <article>
+          <h3>Potencial eléctrico (V)</h3>
+          <p>Trabajo por unidad de carga. Para una carga puntual: <code>V = k·q / r</code> con <code>k = 8.9875517923×10⁹ N·m²/C²</code>.</p>
+        </article>
+        <article>
+          <h3>Corriente eléctrica (I)</h3>
+          <p>Tasa de flujo de carga: <code>I = Q / t</code>. Relación por la ley de Ohm: <code>I = V / R</code>.</p>
+        </article>
+        <article>
+          <h3>Resistencia (R)</h3>
+          <p>Oposición al flujo de corriente. Ley de Ohm: <code>R = V / I</code>. Por resistividad: <code>R = ρ·L / A</code>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Calculadora de Física</h2>
+      <div class="calc-grid">
+
+        <div class="calc card-lite">
+          <h3>Potencial — carga puntual</h3>
+          <label>Carga q (C)</label>
+          <input id="q" placeholder="ej: 1e-6" />
+          <label>Distancia r (m)</label>
+          <input id="r" placeholder="ej: 0.5" />
+          <div class="row">
+            <button onclick="calcPotential()">Calcular V</button>
+            <button onclick="clearPotential()" class="secondary">Limpiar</button>
+          </div>
+          <div id="vResult" class="result">Resultado: —</div>
+        </div>
+
+        <div class="calc card-lite">
+          <h3>Corriente</h3>
+          <label>Carga total Q (C)</label>
+          <input id="Q" placeholder="ej: 0.02" />
+          <label>Tiempo t (s)</label>
+          <input id="t" placeholder="ej: 0.5" />
+          <div class="row">
+            <button onclick="calcCurrentFromQ()">I = Q / t</button>
+            <button onclick="clearCurrentQ()" class="secondary">Limpiar</button>
+          </div>
+
+          <hr>
+
+          <label>Voltaje V (V)</label>
+          <input id="V_ohm" placeholder="ej: 12" />
+          <label>Resistencia R (Ω)</label>
+          <input id="R_ohm" placeholder="ej: 6" />
+          <div class="row">
+            <button onclick="calcCurrentFromOhm()">I = V / R</button>
+            <button onclick="clearCurrentOhm()" class="secondary">Limpiar</button>
+          </div>
+          <div id="iResult" class="result">Resultado: —</div>
+        </div>
+
+        <div class="calc card-lite">
+          <h3>Resistencia</h3>
+          <label>Voltaje V (V)</label>
+          <input id="V_r" placeholder="ej: 12" />
+          <label>Corriente I (A)</label>
+          <input id="I_r" placeholder="ej: 2" />
+          <div class="row">
+            <button onclick="calcResistanceOhm()">R = V / I</button>
+            <button onclick="clearResistanceOhm()" class="secondary">Limpiar</button>
+          </div>
+
+          <hr>
+
+          <label>Resistividad ρ (Ω·m)</label>
+          <input id="rho" placeholder="ej: 1.68e-8 (cobre)" />
+          <label>Longitud L (m)</label>
+          <input id="L" placeholder="ej: 2" />
+          <label>Área A (m²)</label>
+          <input id="A" placeholder="ej: 1e-6" />
+          <div class="row">
+            <button onclick="calcResistanceRho()">R = ρ·L / A</button>
+            <button onclick="clearResistanceRho()" class="secondary">Limpiar</button>
+          </div>
+          <div id="rResult" class="result">Resultado: —</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Manual de usuario (rápido)</h2>
+      <ol>
+        <li>Ingresa los valores numéricos en las casillas (puedes usar notación científica, ej. <code>5e-6</code>).</li>
+        <li>Pulsa el botón correspondiente; el resultado aparecerá en el recuadro "Resultado".</li>
+        <li>Usa "Limpiar" para borrar entradas; recarga la página para reiniciar todo.</li>
+      </ol>
+      <p class="muted">Precaución: la calculadora usa <code>k = 8.9875517923×10⁹</code> para Coulomb.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div>Desarrollado por Norberto Pedro Chún González — Carné 0903-24-5288</div>
+    <div>Universidad Mariano Gálvez</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+<section class="card">
+  <h2>Conceptos clave</h2>
+  <div class="concepts">
+    <article>
+      <h3>Potencial eléctrico (V)</h3>
+      <p>
+        El potencial eléctrico representa la energía por unidad de carga en un punto del campo eléctrico.
+        Indica el trabajo necesario para mover una carga desde un punto de referencia hasta ese punto.
+      </p>
+      <p>
+        <strong>¿Para qué sirve?</strong> Sirve para medir la energía eléctrica disponible para mover cargas en un circuito.
+        Permite analizar el comportamiento de campos eléctricos, condensadores y la distribución de cargas.
+      </p>
+      <p>
+        <strong>¿Dónde se usa?</strong> Se aplica en sistemas eléctricos, diseño de circuitos, análisis de baterías, motores eléctricos y en el estudio del campo eléctrico en física.
+      </p>
+      <p>
+        Fórmula: <code>V = k·q / r</code>, donde <code>k = 8.9875517923×10⁹ N·m²/C²</code>.
+      </p>
+    </article>
+
+    <article>
+      <h3>Corriente eléctrica (I)</h3>
+      <p>
+        La corriente eléctrica es el flujo de carga eléctrica que circula a través de un conductor en un tiempo determinado.
+      </p>
+      <p>
+        <strong>¿Para qué sirve?</strong> Permite transportar energía eléctrica a través de cables para alimentar dispositivos y equipos.
+        También se utiliza para generar movimiento, luz, calor y señales electrónicas.
+      </p>
+      <p>
+        <strong>¿Dónde se usa?</strong> En todo sistema eléctrico y electrónico: desde electrodomésticos y computadoras, hasta redes eléctricas e instalaciones industriales.
+      </p>
+      <p>
+        Fórmulas: <code>I = Q / t</code> y <code>I = V / R</code> (Ley de Ohm).
+      </p>
+    </article>
+
+    <article>
+      <h3>Resistencia (R)</h3>
+      <p>
+        La resistencia eléctrica mide la oposición que presenta un material al paso de la corriente eléctrica.
+      </p>
+      <p>
+        <strong>¿Para qué sirve?</strong> Sirve para controlar la cantidad de corriente que pasa por un circuito y evitar sobrecargas.
+        Además, permite transformar energía eléctrica en calor en dispositivos como resistencias, estufas o focos.
+      </p>
+      <p>
+        <strong>¿Dónde se usa?</strong> En todos los componentes eléctricos: resistores, calentadores, sensores, y sistemas de control de corriente.
+      </p>
+      <p>
+        Fórmulas: <code>R = V / I</code> y <code>R = ρ·L / A</code>.
+      </p>
+    </article>
+  </div>
+</section>
